@@ -5,6 +5,8 @@
 #include "../decoder.h"
 #include "../yuv_2_rgb.h"
 
+#include "../android/android_native_window.h"
+
 #include <opencv2/opencv.hpp>
 
 //extern "C" {
@@ -19,8 +21,11 @@
 extern "C" {
 #endif
 
+#include <libavutil/imgutils.h>
+
 //enum AVPixelFormat pixelFormat = AV_PIX_FMT_BGR24;
 enum AVPixelFormat pixelFormat = AV_PIX_FMT_RGB565LE;
+int native_pix_format = PIXEL_FORMAT_RGB_565;
 
 typedef struct _EnvPackage{
     JNIEnv *env;
@@ -98,42 +103,16 @@ void handle_data(AVFrame *pFrame, void *param, void *ctx){
     //save_rgb_image(rgbFrame);
 
     EnvPackage *envPackage = (EnvPackage *)ctx;
-
-    ANativeWindow_Buffer nwBuffer;
     ANativeWindow *aNativeWindow = ANativeWindow_fromSurface(envPackage->env, *(envPackage->surface));
-    if (aNativeWindow == NULL) {
-        LOGE("ANativeWindow_fromSurface error");
-        return;
-    }
 
-    //scaled buffer to fit window
-    int retval = ANativeWindow_setBuffersGeometry(aNativeWindow, rgbFrame->width, rgbFrame->height,  WINDOW_FORMAT_RGB_565);
+    VoutInfo voutInfo;
+    voutInfo.buffer = rgbFrame->data[0];
+    voutInfo.buffer_width = rgbFrame->width;
+    voutInfo.buffer_height = rgbFrame->height;
+    voutInfo.pix_format = native_pix_format;
 
-    if (0 != ANativeWindow_lock(aNativeWindow, &nwBuffer, 0)) {
-        LOGE("ANativeWindow_lock error");
-        return;
-    }
+    android_native_window_display(aNativeWindow, &voutInfo);
 
-    if (nwBuffer.format == WINDOW_FORMAT_RGB_565) {
-        memcpy((__uint16_t *) nwBuffer.bits, (__uint16_t *)rgbFrame->data[0], rgbFrame->width * rgbFrame->height *2);
-    }
-
-//    jclass clazz = envPackage->env->GetObjectClass(*(envPackage->obj));
-//    //jmethodID callbackMethodID = envPackage->env->GetMethodID(clazz, "onFrameDecode", "([BII)V");
-//    jmethodID callbackMethodID = envPackage->env->GetMethodID(clazz, "onFrameDecode", "([III)V");
-//    LOGE("rgbFrame->data %d %d %d %d %d", rgbFrame->data[0][0], rgbFrame->data[0][1], rgbFrame->data[0][2], rgbFrame->data[0][3], rgbFrame->data[0][4]);
-//    jint *ptr = (jint *)(&rgbFrame->data[0][0]);
-//    LOGE("rgbFrame->data ptr %d %d %d %d %d", (unsigned int)ptr[0], (unsigned int)ptr[1], (unsigned int)ptr[2], (unsigned int)ptr[3], (unsigned int)ptr[4]);
-//    jintArray ret = envPackage->env->NewIntArray(pFrame->width * pFrame->height);
-//    envPackage->env->SetIntArrayRegion(ret, 0, rgbFrame->width*rgbFrame->height, ptr);
-//    //LOGE("rgbFrame->data %d %d %d", p_ret[0], p_ret[1], p_ret[2]);
-//    LOGE("rgbFrame->data1 %d %d %d %d %d %d %d", ret[0], ret[1], ret[2], ret[3], ret[4], ret[5], ret[6]);
-//    envPackage->env->CallVoidMethod(*(envPackage->obj), callbackMethodID, ret, pFrame->width, pFrame->height);
-
-    if(0 !=ANativeWindow_unlockAndPost(aNativeWindow)){
-        LOGE("ANativeWindow_unlockAndPost error");
-        return;
-    }
     ANativeWindow_release(aNativeWindow);
 
     av_free(rgbFrame->data[0]);
@@ -146,11 +125,8 @@ void handle_data(AVFrame *pFrame, void *param, void *ctx){
  * Signature: ([BII)V
  */
 JNIEXPORT void JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWrapper_decode_1stream
-        //(JNIEnv *env, jobject obj, jbyteArray jdata, jint length, decoder *this_obj, jobject surface){
         (JNIEnv *env, jobject obj, jbyteArray jdata, jint length, jlong this_obj_long, jobject surface){
 
-    //int this_obj_real = (int)this_obj_long;
-//    long this_obj_real = this_obj_long;
     decoder *this_obj = this_obj_long;
 
     jbyte *cdata = env->GetByteArrayElements(jdata, JNI_FALSE);

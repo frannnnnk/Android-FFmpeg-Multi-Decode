@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        test_decode(mFrameRender);
+                        test_decode(mFrameRender, R.raw.cuc_ieschool);
                     }
                 });
                 thread.start();
@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        test_decode(mFrameRender1);
+                        test_decode(mFrameRender1, R.raw.ds);
                     }
                 });
                 thread.start();
@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        test_decode(mFrameRender2);
+                        test_decode(mFrameRender2, R.raw.video_data);
                     }
                 });
                 thread.start();
@@ -123,9 +123,9 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void test_decode(FrameRender frameRender){
+    private void test_decode(FrameRender frameRender, int resourceId){
 
-        InputStream inputStream = getResources().openRawResource(R.raw.video_data);
+        InputStream inputStream = getResources().openRawResource(resourceId);
         //InputStream inputStream = getResources().openRawResource(R.raw.ds);
         //InputStream inputStream = getResources().openRawResource(R.raw.cuc_ieschool);
         byte[] buffer = new byte[1024*8];

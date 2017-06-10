@@ -26,7 +26,7 @@ include $(OPENCV_MK_PATH)
 endif
 
 LOCAL_MODULE := codec
-LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/codec/*.cpp) $(wildcard $(LOCAL_PATH)/codec/jni/*.cpp) log.h
+LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/codec/*.cpp) $(wildcard $(LOCAL_PATH)/codec/jni/*.cpp) $(wildcard $(LOCAL_PATH)/codec/android/*.cpp) log.h
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/codec/ffmpeg/
 LOCAL_SHARED_LIBRARIES += ffmpeg
 LOCAL_LDLIBS +=  -lm -llog  -ljnigraphics -landroid

@@ -102,6 +102,15 @@
  /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/deque \
  /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/vector \
  /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../yuv_2_rgb.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/android_native_window.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../../log.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/imgutils.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/avutil.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/pixdesc.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/attributes.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/pixfmt.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/version.h \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/rational.h \
  ../../../../native/jni/include/opencv2/opencv.hpp \
  ../../../../native/jni/include/opencv2/core.hpp \
  ../../../../native/jni/include/opencv2/core/cvdef.h \
@@ -156,7 +165,8 @@
  ../../../../native/jni/include/opencv2/videoio/videoio_c.h \
  ../../../../native/jni/include/opencv2/ml.hpp \
  /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/map \
- /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/__tree
+ /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/__tree \
+ /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/ffmpeg/libavutil/imgutils.h
 
 /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../decoder.h:
 
@@ -362,6 +372,24 @@
 
 /Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../yuv_2_rgb.h:
 
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/android_native_window.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../../log.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/imgutils.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/avutil.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/pixdesc.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/attributes.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/pixfmt.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/version.h:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/jni/../android/../ffmpeg/libavutil/rational.h:
+
 ../../../../native/jni/include/opencv2/opencv.hpp:
 
 ../../../../native/jni/include/opencv2/core.hpp:
@@ -471,3 +499,5 @@
 /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/map:
 
 /Users/lidechen/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/libcxx/include/__tree:
+
+/Users/lidechen/AndroidStudioProjects/working/live_sdk/Android_Video_Demos/multichannel_decode/app/src/main/jni/codec/ffmpeg/libavutil/imgutils.h:
