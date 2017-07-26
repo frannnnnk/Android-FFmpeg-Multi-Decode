@@ -20,11 +20,13 @@ OpenCV_INSTALL_MODULES := on
 OpenCV_CAMERA_MODULES := off
 OPENCV_LIB_TYPE := SHARED
 ifeq ("$(wildcard $(OPENCV_MK_PATH))","")
-include ../../../../native/jni/OpenCV.mk
+include ../../../native/jni/OpenCV.mk
 else
 include $(OPENCV_MK_PATH)
 endif
 
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
 LOCAL_MODULE := codec
 LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/codec/*.cpp) $(wildcard $(LOCAL_PATH)/codec/jni/*.cpp) $(wildcard $(LOCAL_PATH)/codec/android/*.cpp) log.h
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/codec/ffmpeg/
