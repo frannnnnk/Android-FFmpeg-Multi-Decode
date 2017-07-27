@@ -7,8 +7,6 @@
 
 #include "../android/android_native_window.h"
 
-#include <opencv2/opencv.hpp>
-
 //extern "C" {
 #include <android/bitmap.h>
 #include <android/native_window.h>
@@ -42,7 +40,7 @@ JNIEXPORT long JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWra
         (JNIEnv *env, jobject obj){
     decoder *p = new decoder();
     p->initialize(pixelFormat);
-    return p;
+    return (long)p;
 }
 
 //#define VIDEOWIDTH 1280
@@ -67,30 +65,6 @@ void rgb5652bgr888(short *src, char *dest, int size){
     }
 }
 
-void save_rgb_image(AVFrame *pFrame){
-
-    static int flag = 0;
-    flag++;
-    if(flag == 40) {
-        LOGE("save_rgb_image saving ...");
-        flag ++;
-
-        //save rgb565
-        char *dest = (char *)malloc(VIDEOWIDTH * VIDEOHEIGHT * 3);
-        rgb5652bgr888((short *)pFrame->data[0], dest, VIDEOWIDTH * VIDEOHEIGHT);
-        IplImage *iplImagePre = cvCreateImage(cvSize(VIDEOWIDTH, VIDEOHEIGHT), 8, 3);
-        memcpy(iplImagePre->imageData, dest, VIDEOWIDTH * VIDEOHEIGHT * 3);
-        cvSaveImage("/storage/emulated/0/android_video_demo/image.jpeg", iplImagePre);
-
-        //save rgb24
-        /*IplImage *iplImagePre = cvCreateImage(cvSize(VIDEOWIDTH, VIDEOHEIGHT), 8, 3);
-        memcpy(iplImagePre->imageData, pFrame->data[0], IMG_FRAME_SIZE);
-        cvSaveImage("/storage/emulated/0/android_video_demo/image.jpeg", iplImagePre);*/
-
-        LOGE("save_rgb_image saved ...");
-    }
-}
-
 void handle_data(AVFrame *pFrame, void *param, void *ctx){
 
     RenderParam *renderParam = (RenderParam *)param;
@@ -98,9 +72,6 @@ void handle_data(AVFrame *pFrame, void *param, void *ctx){
     AVFrame	*rgbFrame = yuv420p_2_argb(pFrame, renderParam->swsContext, renderParam->avCodecContext, pixelFormat);//AV_PIX_FMT_RGB565LE
 
     LOGE("width %d height %d",rgbFrame->width, rgbFrame->height);
-
-    //for test decode image
-    //save_rgb_image(rgbFrame);
 
     EnvPackage *envPackage = (EnvPackage *)ctx;
     ANativeWindow *aNativeWindow = ANativeWindow_fromSurface(envPackage->env, *(envPackage->surface));
@@ -127,7 +98,7 @@ void handle_data(AVFrame *pFrame, void *param, void *ctx){
 JNIEXPORT void JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWrapper_decode_1stream
         (JNIEnv *env, jobject obj, jbyteArray jdata, jint length, jlong this_obj_long, jobject surface){
 
-    decoder *this_obj = this_obj_long;
+    decoder *this_obj = (decoder *)this_obj_long;
 
     jbyte *cdata = env->GetByteArrayElements(jdata, JNI_FALSE);
     jbyte *cdata_rec = cdata;
@@ -150,7 +121,7 @@ JNIEXPORT void JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWra
                 break;
             }
             //decode h264 cdata to yuv and save yuv data to avFrame which would be passed to handle_data
-            this_obj->decodeFrame(cdata, len, handle_data, &package);
+            this_obj->decodeFrame((const char *)cdata, len, handle_data, &package);
             cdata = cdata + len;
             LOGE("decode length: %d ", len);
             //this_obj->decodeFrame(cdata, length, handle_data, NULL);
@@ -170,7 +141,7 @@ JNIEXPORT void JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWra
 JNIEXPORT void JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWrapper_release_1codec
         (JNIEnv *env, jobject obj, long this_obj_long){
 
-    decoder *this_obj = this_obj_long;
+    decoder *this_obj = (decoder *)this_obj_long;
 
     this_obj->close();
     delete this_obj;

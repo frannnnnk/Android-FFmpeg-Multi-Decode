@@ -13,7 +13,7 @@ extern "C" {
 
 #include "../../log.h"
 
-#include "../ffmpeg/libavutil/imgutils.h"
+#include "libavutil/imgutils.h"
 
 enum {
     PIXEL_FORMAT_RGBA_8888 = 1,

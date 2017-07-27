@@ -1,5 +1,7 @@
 .idea/
 build/
+obj/
+libs/
 *.properties
 .gradle/
 *.iml

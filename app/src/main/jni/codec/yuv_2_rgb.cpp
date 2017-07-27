@@ -20,7 +20,7 @@ AVFrame	*yuv420p_2_argb(AVFrame	*frame, SwsContext *swsContext, AVCodecContext *
     //给pFrameRGB帧加上分配的内存;  //AV_PIX_FMT_ARGB
     int size = avpicture_get_size(format, avCodecContext->width, avCodecContext->height);
     //out_bufferRGB = new uint8_t[size];
-    out_bufferRGB = av_malloc(size * sizeof(uint8_t));
+    out_bufferRGB = (uint8_t  *)av_malloc(size * sizeof(uint8_t));
     avpicture_fill((AVPicture *)pFrameRGB, out_bufferRGB, format, avCodecContext->width, avCodecContext->height);
     //YUV to RGB
     sws_scale(swsContext, frame->data, frame->linesize, 0, avCodecContext->height, pFrameRGB->data, pFrameRGB->linesize);

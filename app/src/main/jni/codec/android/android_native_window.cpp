@@ -26,7 +26,7 @@ void render_on_rgb(ANativeWindow_Buffer *nwBuffer, VoutInfo *voutInfo, int bpp){
         }*/
 
         //使用ffmpeg的函数 实现相同功能
-        av_image_copy_plane(nwBuffer->bits, dst_line_size, voutInfo->buffer, src_line_size, src_line_size, min_height);
+        av_image_copy_plane((uint8_t*)nwBuffer->bits, (int)dst_line_size, (const uint8_t *)voutInfo->buffer, (int)src_line_size, (int)src_line_size, (int)min_height);
     }
 }
 
@@ -69,7 +69,7 @@ void android_native_window_display(ANativeWindow *aNativeWindow, VoutInfo *voutI
     int retval = ANativeWindow_setBuffersGeometry(aNativeWindow, voutInfo->buffer_width, voutInfo->buffer_height,  render->window_format);
     if (retval < 0) {
         LOGE("ANativeWindow_setBuffersGeometry: error %d", retval);
-        return retval;
+        return;
     }
 
     if (0 != ANativeWindow_lock(aNativeWindow, &nwBuffer, 0)) {

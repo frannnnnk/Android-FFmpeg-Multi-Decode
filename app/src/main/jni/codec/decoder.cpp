@@ -107,7 +107,7 @@ int decoder::decodeFrame(const char *data, int length, void (*handle_data)(AVFra
         //LOGE("parsedLength %d    %x %x %x %x %x %x %x %x", parsedLength, cur_ptr[0], cur_ptr[1], cur_ptr[2], cur_ptr[3], cur_ptr[4], cur_ptr[5], cur_ptr[6], cur_ptr[7]);
         //LOGE("parsedLength %d    %x %x %x %x %x %x %x %x", parsedLength, *(cur_ptr-parsedLength), *(cur_ptr-parsedLength+1), *(cur_ptr-parsedLength+2), *(cur_ptr-parsedLength+3), *(cur_ptr-parsedLength+4), *(cur_ptr-parsedLength+5), *(cur_ptr-parsedLength+6), *(cur_ptr-parsedLength+7));
         NalInfo nalInfo;
-        ret = handleH264Header(cur_ptr-parsedLength, &nalInfo);
+        ret = handleH264Header((uint8_t *)cur_ptr-parsedLength, &nalInfo);
         if(ret == 0){
         }
 
