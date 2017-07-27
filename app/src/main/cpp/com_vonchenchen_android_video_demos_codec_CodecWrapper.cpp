@@ -36,7 +36,7 @@ typedef struct _EnvPackage{
  * Method:    get_codec
  * Signature: ()I
  */
-JNIEXPORT long JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWrapper_get_1codec
+JNIEXPORT jint JNICALL Java_com_vonchenchen_android_1video_1demos_codec_CodecWrapper_get_1codec
         (JNIEnv *env, jobject obj){
     decoder *p = new decoder();
     p->initialize(pixelFormat);
