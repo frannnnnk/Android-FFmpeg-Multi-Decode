@@ -2,6 +2,7 @@
 build/
 obj/
 libs/
+.externalNativeBuild/
 *.properties
 .gradle/
 *.iml
